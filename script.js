@@ -18,18 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Kode untuk animasi gulir
+    // Kode untuk animasi gulir dinamis
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Jika elemen memasuki viewport, tambahkan kelas untuk animasi muncul
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+            } else {
+                // Jika elemen keluar dari viewport, hapus kelas agar menghilang
+                entry.target.classList.remove('is-visible');
             }
         });
     }, {
-        threshold: 0.2
+        threshold: 0.2 // Animasi dipicu ketika 20% elemen terlihat
     });
 
     animatedElements.forEach(element => {
@@ -51,4 +54,5 @@ document.addEventListener("DOMContentLoaded", function () {
         star.style.opacity = `${0.5 + Math.random() * 0.5}`;
         starsContainer.appendChild(star);
     }
+
 });
